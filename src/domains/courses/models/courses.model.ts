@@ -1,4 +1,3 @@
-import { Types } from "aws-sdk/clients/acm";
 import * as mongoose from "mongoose";
 
 export interface ICourse {

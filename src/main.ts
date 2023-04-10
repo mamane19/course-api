@@ -37,7 +37,10 @@ async function bootstrap() {
   // cors configuration. You can put the origins in the .env file
   app.enableCors({
     credentials: true,
-    origin: ["http://localhost:3000"],
+    origin: [
+      "http://localhost:3000",
+      "https://web-production-13c6.up.railway.app",
+    ],
   });
 
   // enabling shutdown hooks for graceful shutdown of the server

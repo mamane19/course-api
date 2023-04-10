@@ -1,28 +1,29 @@
-import { DocumentBuilder, SwaggerDocumentOptions } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerDocumentOptions } from "@nestjs/swagger";
 
 // Swagger setup
 export const configs = new DocumentBuilder()
-  .setTitle('Muralex API')
-  .setDescription('Restful API for the Muralex backend')
-  .setVersion('1.0')
-  .addSecurity('basic', {
-    type: 'http',
-    scheme: 'basic',
+  .setTitle("Muralex API")
+  .setDescription("Restful API for the Muralex backend")
+  .setVersion("1.0")
+  .addSecurity("basic", {
+    type: "http",
+    scheme: "basic",
   })
-  .addSecurity('bearer', {
-    type: 'apiKey',
-    name: 'Authorization',
-    in: 'header',
+  .addSecurity("bearer", {
+    type: "apiKey",
+    name: "Authorization",
+    in: "header",
   })
   .addBearerAuth(
     {
-      type: 'http',
-      scheme: 'bearer',
-      bearerFormat: 'JWT',
+      type: "http",
+      scheme: "bearer",
+      bearerFormat: "JWT",
     },
-    'access-token',
+    "access-token"
   )
-  .addServer('http://localhost:3000/', 'local')
+  .addServer("http://localhost:3000/", "local")
+  .addServer("https://web-production-13c6.up.railway.app", "dev")
   .build();
 
 export const options: SwaggerDocumentOptions = {

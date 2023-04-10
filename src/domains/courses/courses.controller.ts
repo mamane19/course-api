@@ -61,4 +61,13 @@ export class CoursesController {
   ): Promise<ICourse> {
     return this.coursesService.update(id, course);
   }
+
+  @Post("search")
+  @ApiOperation({
+    summary: "Search for a course by name",
+    // description: 'Search for a course by name',
+  })
+  public search(@Body("name") name: string): Promise<object> {
+    return this.coursesService.search(name);
+  }
 }

@@ -40,4 +40,7 @@ export const CourseSchema = new mongoose.Schema<ICourse>(
   { timestamps: true }
 );
 
+// adding an index to the schema on name
+CourseSchema.index({ name: 1 });
+
 export const orderModel = mongoose.model<ICourse>("courses", CourseSchema);

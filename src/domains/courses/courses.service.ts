@@ -50,4 +50,17 @@ export class CoursesService {
     }
     return deletedCourse;
   }
+
+  // search based on name and return the course application deadline
+  public async search(name: string): Promise<object> {
+    const course = await this.courseModel.find({ name: name }).exec();
+    if (!course) {
+      throw new NotFoundException("Course not found");
+    }
+
+    return {
+      "The application deadline for this course is: ":
+        course[0].applicationDeadline,
+    };
+  }
 }

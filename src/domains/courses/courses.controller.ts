@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Patch,
+  Query,
 } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CoursesService } from "./courses.service";
@@ -30,6 +31,14 @@ export class CoursesController {
   })
   public create(@Body() dto: CreateCourseDto): Promise<ICourse> {
     return this.coursesService.create(dto);
+  }
+  @Get("search")
+  @ApiOperation({
+    summary: "Search for a course by name",
+    // description: 'Search for a course by name',
+  })
+  public search(@Query("name") name: string): Promise<object> {
+    return this.coursesService.search(name);
   }
 
   @Get()
@@ -60,14 +69,5 @@ export class CoursesController {
     @Body() course: ICourse
   ): Promise<ICourse> {
     return this.coursesService.update(id, course);
-  }
-
-  @Post("search")
-  @ApiOperation({
-    summary: "Search for a course by name",
-    // description: 'Search for a course by name',
-  })
-  public search(@Body("name") name: string): Promise<object> {
-    return this.coursesService.search(name);
   }
 }

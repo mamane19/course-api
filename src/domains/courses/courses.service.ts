@@ -53,14 +53,25 @@ export class CoursesService {
 
   // search based on name and return the course application deadline
   public async search(name: string): Promise<object> {
-    const course = await this.courseModel.find({ name: name }).exec();
+    // we ignore the the case sensitivity of the search
+    const regex = new RegExp(name, "i");
+    const course = await this.courseModel.find({ name: regex }).exec();
+    // const course = await this.courseModel.find({ name: name }).exec();
     if (!course) {
       throw new NotFoundException("Course not found");
     }
 
-    return {
-      "The application deadline for this course is: ":
-        course[0].applicationDeadline,
-    };
+    // if we have more than one course with the same name, we return each course with its deadline
+    if (course.length > 1) {
+      const courseWithDeadline = course.map((course) => {
+        return {
+          name: course.name,
+          applicationDeadline: course.applicationDeadline,
+          tuitionCost: course.tuitionCost,
+          availableFunding: course.availableFunding,
+        };
+      });
+      return courseWithDeadline;
+    }
   }
 }

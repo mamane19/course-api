@@ -23,8 +23,8 @@ export const CourseSchema = new mongoose.Schema<ICourse>(
     },
     applicationDeadline: {
       type: Date,
-      required: true,
-      default: Date.now(),
+      // required: true,
+      default: Date.now() + 7 * 24 * 60 * 60 * 1000,
     },
     tuitionCost: {
       type: Number,

@@ -25,9 +25,9 @@ export class CreateCourseDto {
   public description: string;
 
   // @IsDate()
-  @IsNotEmpty()
-  @ApiProperty()
-  public applicationDeadline: Date;
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // public applicationDeadline: Date;
 
   @IsNumber()
   @IsNotEmpty()
